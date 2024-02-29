@@ -117,22 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="Title.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="Image.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="Artist.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="Album.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="Genre.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="Language.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="Year.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="Count.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="artistColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="Title.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -157,7 +148,7 @@
   <data name="buttonOpenFileDialog.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAA
-        rgAAAK4B+ff3XQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAGUSURBVFhH7dc/
+        qAAAAKgBefSzxgAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAGUSURBVFhH7dc/
         KAZxHMfxQzYlKZsSmRTKRCFlYqCsNmVRNpQFi8hipIwWhc2AMrMoshATg0nkX5Q/78+533Wue9x1z909
         pedTr7rv77nu++15fk/P77F8qcMQRn1G0I1KpJJqbOErxCOmUYrEUoFTBDXMZRmJZRbmwdtoR71PA/px
         BnNvGxLJOfTAY5Rp4Y/U4hW6/wBTMYyjA27eoQcu2lV4DmHehXxsoBzugj6KKBnDG7wPi2sGbhF1gHyj
@@ -180,7 +171,7 @@
   <data name="buttonAddToPlaylist.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAA
-        6QAAAOkBVJIUSwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAFeSURBVFhH7Za9
+        4wAAAOMBD+bfpwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAFeSURBVFhH7Za9
         LkRBHEdXIjQ+otCQSHQStVcQhUIi3oKoNGov4RGUCloRBRWFRk2pEJ+h4pzNnWQyrlm7uWNFnORkd+Z/
         753fzp3ZTOuff7rguFL8fMIz3MBhLM57pRggtPUCp7EocQAZxRW8whDCmUjD1XmEXRNuTpnAa7S2jj8e
         QNbQ2mm7VYhcgDG09tBuFSIXQJzWnqb2u3QKUJxcgKXKouQCvFXG5HZD47ugrtb3AI0TD+L7dspDX+or
@@ -193,7 +184,7 @@
   <data name="buttonShuffle.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAA
-        cwAAAHMBY8FD/gAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAADPSURBVDhP1dKx
+        cAAAAHABznhikwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAADPSURBVDhP1dKx
         CwFRHMDxl1EMwmYyKJPVQPIn+AtYKMpAZDPIoBSbHX+AP8BqMVgYJAMGm79Bvu+93F09dXcG5Vufer/r
         unrvnvjLUsjppV0dXRTVZBZDDT2s8cQEVi2MccRQPnCUxA1LjLCB8YF3EZxQVpMQYRzQUZMuDWMLzuQL
         WwSwwgJfNcAOQTX5rIQ7EmryWQYPZCHPYgbPxXFBRU1ChLBHU006eUZ5vbRrQO75jE+/8Yo5nPdgCqs2

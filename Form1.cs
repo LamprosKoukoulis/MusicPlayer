@@ -1,4 +1,5 @@
 ﻿using AxWMPLib;
+using Microsoft.VisualBasic.Devices;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,6 +16,10 @@ using System.Windows.Forms;
 using TagLib;
 using WMPLib;
 
+//This app was made using TagLib-sharp and sqlite
+//p18081
+
+
 namespace MusicPlayerApp
 {
     public partial class Form1 : Form
@@ -24,7 +29,7 @@ namespace MusicPlayerApp
         public MusicPlayer musicPlayer;
         private List<MusicTrack> musicTracks = new List<MusicTrack>(); //musicTracks list to itterate through the tracks
         private IWMPPlaylist playlist;
-        ToolTip toolTip=new ToolTip();
+        ToolTip toolTip = new ToolTip();
 
         public Form1()
         {
@@ -36,10 +41,7 @@ namespace MusicPlayerApp
             updateDataGridView();
             dataGridView1.DataSource = dbConnector.LoadTracks(); //DataBind datagridview -> TracksDB.db
             playlist = axWindowsMediaPlayer1.playlistCollection.newPlaylist("Playlist");
-            toolTip.SetToolTip(buttonAddToPlaylist, "Select song row to add to the playlist");
-            toolTip.SetToolTip(buttonRemove, "Select song row to remove from the playlist");
-            toolTip.SetToolTip(button1, "Edit song and select song row to remove from the playlist");
-            toolTip.SetToolTip(listBoxPlaylist, "Add songs to the playlist");
+            InitializeToolTips();
         }
 
         private void LoadTracksFromDb()
@@ -62,6 +64,15 @@ namespace MusicPlayerApp
                 musicTracks.Add(track);
             }
         }
+
+        private void InitializeToolTips()
+        {
+            toolTip.SetToolTip(buttonAddToPlaylist, "Select song row to add to the playlist");
+            toolTip.SetToolTip(buttonRemove, "Select song row to remove from the playlist");
+            toolTip.SetToolTip(button1, "Edit song and select song row to remove from the playlist");
+            toolTip.SetToolTip(listBoxPlaylist, "Add songs to the playlist");
+        }
+
 
         private void buttonOpenFileDialog_Click(object sender, EventArgs e)
         {
@@ -123,16 +134,27 @@ namespace MusicPlayerApp
             dataGridView1.Columns.Clear();
             dataGridView1.Rows.Clear();
             dataGridView1.DataSource = dbConnector.LoadTracks();
+            dataGridView1.Columns["Path"].Visible = false;
             dataGridView1.Refresh();
             //MessageBox.Show("Updated TrackListBox", "Update", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         private void updatePlaylist()
         {
             listBoxPlaylist.Items.Clear();
+            listBoxPlaylist.Items.Add(formateString("Playlist"));
             for (int i = 0; i < playlist.count; i++)
             {
-                listBoxPlaylist.Items.Add(playlist.Item[i].name);
+                listBoxPlaylist.Items.Add(formateString(playlist.Item[i].name));
             }
+        }
+
+        private string formateString(string text)
+        {
+            int totalWidth=48;
+            int textWidth = text.Length;
+            int leftPadding = (totalWidth - textWidth)/2;
+            text =new string(' ',leftPadding)+text;
+            return text;
         }
 
         private void buttonAddToPlaylist_Click(object sender, EventArgs e)
@@ -140,6 +162,10 @@ namespace MusicPlayerApp
             musicPlayer.musicTracks = musicTracks;
             playlist.clear();
             listBoxPlaylist.Items.Clear();
+
+            var formated = formateString("Playlist");
+            listBoxPlaylist.Items.Add(formated);
+
             foreach (DataGridViewRow selectedRow in dataGridView1.SelectedRows)
             {
                 string selectedTitle = selectedRow.Cells[0].Value.ToString();
@@ -149,9 +175,10 @@ namespace MusicPlayerApp
                     if (selectedTrack != null)
                     {
                         var media = axWindowsMediaPlayer1.newMedia(selectedTrack.path);
+
                         playlist.appendItem(media);
                         axWindowsMediaPlayer1.currentPlaylist = playlist;
-                        listBoxPlaylist.Items.Add(selectedTrack.title);
+                        listBoxPlaylist.Items.Add(formateString(selectedTrack.title));
                         axWindowsMediaPlayer1.Ctlcontrols.play();
                     }
                     else
@@ -182,7 +209,7 @@ namespace MusicPlayerApp
         }
 
         private void axWindowsMediaPlayer1_PlayStateChange(object sender, AxWMPLib._WMPOCXEvents_PlayStateChangeEvent e)
-        {//When track ends increament counter+ UI
+        {//When track ends increament counter+ UI update
          //Else if track is playing update the "Now playing: " label
             if (axWindowsMediaPlayer1.playState == WMPPlayState.wmppsMediaEnded)
             {
@@ -216,15 +243,15 @@ namespace MusicPlayerApp
         }
 
         private void buttonRemove_Click(object sender, EventArgs e)
-        {
+        {//Remove track from the playlist
             foreach (DataGridViewRow row in dataGridView1.SelectedRows)
             {
                 string selectedTitle = row.Cells["Title"].Value.ToString();
                 MusicTrack selectedTrack = musicPlayer.FindTrackByTitle(selectedTitle);
                 if (selectedTrack != null)
                 {
-                    var listBoxItem =listBoxPlaylist.FindString(selectedTitle);
-                    if(listBoxItem != -1)
+                    var listBoxItem = listBoxPlaylist.FindString(selectedTitle);
+                    if (listBoxItem != -1)
                     {//If track exists in playlist remove it
                         var remove = playlist.Item[listBoxItem];
                         playlist.removeItem(remove);
@@ -270,12 +297,19 @@ namespace MusicPlayerApp
 
         private void listBoxPlaylist_DoubleClick(object sender, EventArgs e)
         {//Double click listBox Item to play song
-            var selectedIndex = listBoxPlaylist.SelectedIndex;
-            if (selectedIndex>=0 && selectedIndex<playlist.count)
+            Point relativeMousePosition = listBoxPlaylist.PointToClient(MousePosition);
+            //var selectedIndex = listBoxPlaylist.SelectedIndex;
+            var selectedIndex= listBoxPlaylist.IndexFromPoint(relativeMousePosition);
+            if (selectedIndex > 0 && selectedIndex <= playlist.count)
             {
-                axWindowsMediaPlayer1.Ctlcontrols.playItem(playlist.Item[selectedIndex]);
-                
+                axWindowsMediaPlayer1.Ctlcontrols.playItem(playlist.Item[selectedIndex-1]);
+
             }
+        }
+
+        private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+
         }
     }
 }
