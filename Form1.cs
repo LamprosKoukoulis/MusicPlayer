@@ -23,7 +23,7 @@ using WMPLib;
 namespace MusicPlayerApp
 {
     public partial class Form1 : Form
-    {
+    {   //This app was made by p18081
         //icons created by Aswell Studio - Flaticon
         public DataBaseConnector dbConnector;
         public MusicPlayer musicPlayer;
